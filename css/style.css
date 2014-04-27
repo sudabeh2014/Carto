@@ -1,0 +1,55 @@
+html, body {
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+}
+#logo {
+  padding-top: 7px;
+  padding-left: 20px;
+}
+.brand {
+  padding-left: 20px;
+}
+.navbar-static-top .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
+  padding-right: 10px;
+  color:red;
+}
+#menu a.selected,  #menu a:hover {
+  color: #F84F40;
+}
+#map {
+	width: 100%; /*height:100%;*/
+	position: absolute;
+	top: 60px;
+	bottom: 0px;
+	background: black;
+	z-index: 1;
+}
+.modal-body {
+	height: 275px;
+	overflow-y: hidden;
+}
+#legendButton {
+	position: absolute;
+	top: 90px;
+	right: 10px;
+	width: 400px;
+	height: 60px;
+	background: transparent;
+	z-index: 10;
+}
+#legendButton a {
+	float: right;
+	width: 85px;
+	padding: 8px;
+	text-align: center;
+	font: bold 11px "Helvetica", Arial;
+	line-height: normal;
+	color: #555;
+	border-radius: 3px;
+	border: 1px solid #777777;
+	background: #ffffff;
+	text-decoration: none;
+	cursor: pointer;
+}

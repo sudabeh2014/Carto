@@ -1,0 +1,136 @@
+﻿
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Test CartoDB Application</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <link rel="shortcut icon" href="Images/package_network.ico" />
+    <style>
+      html, body, #map {
+        height: 100%;
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+
+    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/l.geosearch.mod.css" />
+      <!-- Mapbox and jQuery -->
+    <script src="http://api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.js"></script><style type="text/css"></style>
+    <link href="http://api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.css" rel="stylesheet">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/mapbox.jquery.js"></script>
+
+    <!-- Mapping Libraries -->	
+    <script src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script><style></style>
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script src="js/leaflet-hash.js"></script>
+    <script src="js/l.geosearch.mod.js"></script>
+    
+  </head>
+  <body>
+    <div id="map"></div>
+       <div class="navbar navbar-inverse navbar-fixed-top" style="background-color:cadetblue"  >
+      <div class="navbar-inner" style="width:100% ">
+      <a href="http://map.google.com/"><img src="images/globe.png" width="96" height="96" title="Goto GoogleMap" id="logo">By Farhad for test.</a>
+          
+          <ul class="nav pull-right">
+            
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><small>BaseMap<b class="caret" style="flood-color :yellowgreen "></b></small></a>
+              <ul class="dropdown-menu">
+                <li><a href="#" target="_blank">Satellite</a></li>
+                <li><a id="roadLayer" href="#">Road</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><small>Layers<b class="caret"></b></small></a>
+              <ul class="dropdown-menu">
+                <li><a href="#" target="_blank">Populated places</a></li>
+                <li><a href="#">Rivers lacks centerlines</a></li>
+                <li><a href="#">World borders</a></li>
+              </ul>
+            </li>
+            <li class="dropdown" title="Download features in this view">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><small><i class="icon-download icon-white"></i> Download features<b class="caret"></b></small></a>
+              <ul class="dropdown-menu">
+                <li><a id="downkml" href="#" target="_blank">KML</a></li>
+                <li><a id="downshp" href="#">Shapefile</a></li>
+                <li><a id="downgeojson" href="#">GeoJSON</a></li>
+                <li><a id="downcsv" href="#">CSV</a></li>
+              </ul>
+            </li>
+              <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><small>Printing<b class="caret"></b></small></a>
+              <ul class="dropdown-menu">
+                <li><a href="#" target="_blank">Print</a></li>
+                <li><a href="#">Export to pdf</a></li>
+              </ul>
+            </li>
+            <li><a href="#myModal" role="button" class="pull-right" data-toggle="modal"><small>About</small></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+	<!--About Window Info -->
+    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">About Us</h3>
+      </div>
+
+      <div class="modal-body">
+        <p><a href="http://www.google.com/">Google</a>’s mission is to organize the world’s information and make it universally accessible and useful.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+      </div>
+    </div>
+      <script src="js/script.js"></script>
+    <!-- include cartodb.js library -->
+    <script src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script>
+
+    <script>
+        function main() {
+            cartodb.createVis('map', 'http://vfm.cartodb.com/api/v2/viz/c89d73d2-c08a-11e3-aeb2-0e73339ffa50/viz.json', {
+                shareable: true,
+                title: true,
+                description: true,
+                search: true,
+                tiles_loader: true,
+                center_lat: 0,
+                center_lon: 0,
+                zoom: 2
+            })
+            .done(function (vis, layers) {
+                // layer 0 is the base layer, layer 1 is cartodb layer
+                // setInteraction is disabled by default
+                layers[1].setInteraction(true);
+                layers[1].on('featureOver', function (e, pos, latlng, data) {
+                    cartodb.log.log(e, pos, latlng, data);
+                });
+
+                // you can get the native map to work with it
+                // depending if you use google maps or leaflet
+                map = vis.getNativeMap();
+
+                // now, perform any operations you need
+                // map.setZoom(3)
+                // map.setCenter(new google.maps.Latlng(...))
+            })
+            .error(function (err) {
+                console.log(err);
+            });
+        }
+
+        window.onload = main;
+    </script>
+
+            
+  </body>
+</html>
